@@ -8,25 +8,22 @@ import {
     VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-import {Link,useLocation} from 'react-router-dom';
+import {Link,useLocation} from "react-router-dom";
 const { Header, Sider, Content } = Layout;
-
-
 const Adminlayout = ({ children }) => {
-
-    const {pathname} = useLocation();
-    console.log(pathname)
+    const {pathname}=useLocation();
+    console.log(pathname);
 
     const items = [
         {
             key: '/admin',
             icon: <DashboardOutlined />,
-            label: <Link to="admin">Dashboard</Link>,
+            label: <Link to ="/admin">Dashboard</Link>
         },
-         {
+          {
             key: '/admin/new-employee',
             icon: <UserOutlined />,
-            label: <Link to="/admin/new-employee">New Employee</Link>,
+            label: <Link to="/admin/new-employee">New Employee</Link>
         },
     ];
 
@@ -34,10 +31,8 @@ const Adminlayout = ({ children }) => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
-
-
     return (
-        <Layout className ='!min-h-screen'>
+        <Layout  className='!min-h-screen'>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical" />
                 <Menu
