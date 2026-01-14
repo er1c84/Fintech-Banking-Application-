@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    DashboardOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UploadOutlined,
@@ -7,22 +8,25 @@ import {
     VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-import {link} from 'react-router-dom';
+import {Link,useLocation} from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 
 const Adminlayout = ({ children }) => {
 
+    const {pathname} = useLocation();
+    console.log(pathname)
+
     const items = [
         {
             key: '/admin',
             icon: <DashboardOutlined />,
-            label: <Link>Dashboard</Link>,
+            label: <Link to="admin">Dashboard</Link>,
         },
          {
-            key: '/admin',
+            key: '/admin/new-employee',
             icon: <UserOutlined />,
-            label: <Link>New Employee</Link>,
+            label: <Link to="/admin/new-employee">New Employee</Link>,
         },
     ];
 
@@ -33,13 +37,13 @@ const Adminlayout = ({ children }) => {
 
 
     return (
-        <Layout>
+        <Layout className ='!min-h-screen'>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical" />
                 <Menu
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[pathname]}
                     items={items}
                 />
             </Sider>
