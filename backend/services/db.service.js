@@ -1,8 +1,7 @@
 require("dotenv").config();
 const mongo = require("mongoose");
 
-const url = process.env.DB_URL;
-
+const url = process.env.MONGO_URL;
 mongo.connect(url);
 
 const findAllRecord = async (schema) => {

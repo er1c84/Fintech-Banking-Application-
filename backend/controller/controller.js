@@ -1,16 +1,29 @@
-const createData = (req, res, Schema) => {
+const dbService = require("../services/db.service");
+
+const createData = async (req, res, Schema) => {
 try{
     const data = req.body;
+    const dbRes = await dbService.createNewRecord(Schema, data);
     res.status(200).json({
-        message: "Data Received",
-        data
+        message: "Data inserted successfully",
+        success: true,
+        data : dbRes
     })
 
 }catch(error){
-    res.status(500).json({
+    if(error.code === 11000) {
+        res.status(422).json({
+        message: "Email already exist",
+        success: false,
+        error 
+    })
+    }
+    else{
+        res.status(500).json({
         message: "Internal Server Error",
         error 
     })
+    }
 }
 }
 module.exports = {
