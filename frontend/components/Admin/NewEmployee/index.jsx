@@ -2,10 +2,21 @@ import Card from "antd/es/card/Card";
 import Adminlayout from "../../Layout/Adminlayout";
 import { Button, Form, Input, Table } from "antd";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { trimData } from "../../../modules/modules";
 
 const {Item} = Form;
 const NewEmployee = () => {
 
+    // states collection (employee form hook)
+    const [empForm] = Form.useForm();
+
+    //create new employee
+    const onFinish = async(values) =>{
+        let finalObj = trimData(values);
+        console.log(values);
+    }
+
+    // columns for table
     const columns = [
         {
             title: "Profile",
@@ -64,7 +75,10 @@ const NewEmployee = () => {
                 <Card
                 title="New Employees"
                 >
-                    <Form layout="vertical">
+                    <Form 
+                    form={empForm}
+                    onFinish={onFinish}
+                    layout="vertical">
                         <Item
                         label="Profile"
                         name="xyz"
@@ -80,7 +94,7 @@ const NewEmployee = () => {
                             <Input />
                         </Item>
                          <Item
-                        name="mobile "
+                        name="mobile"
                         label="Mobile"
                         rules={[{required:true}]}
                         >
@@ -110,7 +124,7 @@ const NewEmployee = () => {
                         <Item>
                             <Button
                             type="text"
-                            htmltype="submit"
+                            htmlType="submit"
                             className="!bg-blue-500 !text-white !font-bold !w-full"
                             >
                                 Submit
