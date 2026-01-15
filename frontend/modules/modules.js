@@ -5,5 +5,5 @@ export const trimData = (obj) => {
     for (let key in obj) {
         finalObj[key] = obj[key]?.trim().toLowerCase();
     }
-    return finalObj;
+    return 
 }
