@@ -153,7 +153,7 @@ const columns = [
                             <Button
                             type="text"
                             htmlType="submit"
-                            className="!bg-pink-400 !text-white !font-bold !w-full">
+                            className="!bg-blue-400 !text-white !font-bold !w-full">
                             Submit
 
                             </Button>
