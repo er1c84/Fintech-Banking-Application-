@@ -9,13 +9,13 @@ const findAllRecord = async (schema) => {
     return dbRes;
 }
 
-const createNewRecord = async (schema, data) => {
-    const dbRes = await new schema(data).save();
+const createNewRecord = async (data, schema) => {
+    const dbRes= await new schema(data).save();
     return dbRes;
 }
 
 const updateRecord = async (id, data, schema) => {
-    const dbRes = await schema.findByIdAndUpdate(id, data, {new: true}); 
+    const dbRes = await schema.findByIdAndUpdate(id, data, { new: true });
     return dbRes;
 }
 
@@ -23,7 +23,6 @@ const deleteRecord = async (id, schema) => {
     const dbRes = await schema.findByIdAndDelete(id);
     return dbRes;
 }
-
 module.exports = {
     findAllRecord,
     createNewRecord,

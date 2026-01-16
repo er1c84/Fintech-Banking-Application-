@@ -18,7 +18,7 @@ const Homelayout = ({children}) => {
   return (
     <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Link to="/admin">Visit Admin Panel</Link>
+          <Link to="/admin"> Visit Admin Panel</Link>
         </Header>
         <Content
           style={{
@@ -36,3 +36,14 @@ const Homelayout = ({children}) => {
 };
 
 export default Homelayout;
+/*          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+            }}
+          />
+          */

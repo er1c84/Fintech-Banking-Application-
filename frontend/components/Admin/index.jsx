@@ -4,7 +4,7 @@ const Dashboard = () => {
     return(
         <Adminlayout>
             <h1 className="text-5xl font-bold text-pink-600">
-               Welcome to dashboard
+                WELCOME TO Admin DASHBOARD
             </h1>
         </Adminlayout>
     )

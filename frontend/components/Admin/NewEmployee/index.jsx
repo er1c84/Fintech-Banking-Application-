@@ -1,8 +1,9 @@
 import { Button, Card, Form, Input, Table } from "antd";
 import Adminlayout from "../../Layout/Adminlayout";
-import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData } from "../../../modules/modules";
 import axios from "axios";
+import swal from "sweetalert";
 
 
 const {Item} = Form;
@@ -13,16 +14,24 @@ const NewEmployee = () => {
     // creat enew employee
     const onFinish = async (values) => {
         try{
-
             let finalObj= trimData(values);
             const{data} = await axios.post("http://localhost:8090/api/users",finalObj);
-            console.log(data);
+            swal("success", "Employee Created Successfully", "success");
         }
         catch(err){
-            console.log(err);
+            if(err?.response?.data?.error?.code ==11000){
+                empForm.setFields([
+                    {
+                        name: "email",
+                        errors: ["Email already exists"],
+                    },
+                ]);
+                    }
+            else{
+                swal("Warning", "Something went wrong", "Warning");
         }
     }
-
+    }
 
     // Table Columns
     const colums = []
@@ -144,7 +153,7 @@ const columns = [
                             <Button
                             type="text"
                             htmlType="submit"
-                            className="!bg-blue-400 !text-white !font-bold !w-full">
+                            className="!bg-pink-400 !text-white !font-bold !w-full">
                             Submit
 
                             </Button>

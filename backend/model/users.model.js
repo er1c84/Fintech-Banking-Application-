@@ -1,7 +1,7 @@
 const mongo = require("mongoose");
-const {Schema} = mongo;
+const { Schema } = mongo;
 
-const userSchema = new Schema({
+const usersSchema = new Schema({
     fullname: String,
     mobile: String,
     email: {
@@ -14,8 +14,8 @@ const userSchema = new Schema({
     userType: String,
     isActive: {
         type: Boolean,
-        default: true
+        default: false
     }
-},{timestamps: true});
+}, { timestamps: true });   
 
-module.exports = mongo.model("user", userSchema);
+module.exports = mongo.model('user', usersSchema);

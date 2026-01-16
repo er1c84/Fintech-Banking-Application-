@@ -1,10 +1,11 @@
-import Homelayout from "../layout/Homelayout";
+import Homelayout from "../Layout/Homelayout";
 import Login from "./Login";
-const Homepage = () => {
+
+const Homepage = () =>{
     return (
-    <Homelayout>
-        <Login />
-    </Homelayout>
+        <Homelayout>
+            <Login />
+        </Homelayout>
     )
 }
 export default Homepage;
