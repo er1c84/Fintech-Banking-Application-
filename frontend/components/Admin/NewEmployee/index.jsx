@@ -4,19 +4,24 @@ import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } 
 import { trimData } from "../../../modules/modules";
 import axios from "axios";
 import swal from "sweetalert";
+import {useState} from "react";
 
+axios.defaults.baseURL = import.meta.env.VITE_BASEURL;
 
 const {Item} = Form;
 const NewEmployee = () => {
     // states collection
-    const[empForm] = Form.useForm();
+    const [empForm] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
-    // creat enew employee
+    // create new employee
     const onFinish = async (values) => {
         try{
+            setLoading(true);
             let finalObj= trimData(values);
-            const{data} = await axios.post("http://localhost:8090/api/users",finalObj);
+            const{data} = await axios.post("/api/users",finalObj);
             swal("success", "Employee Created Successfully", "success");
+            empForm.resetFields();
         }
         catch(err){
             if(err?.response?.data?.error?.code ==11000){
@@ -28,9 +33,11 @@ const NewEmployee = () => {
                 ]);
                     }
             else{
-                swal("Warning", "Something went wrong", "Warning");
+                swal("Warning", "Try again later", "warning");
         }
-    }
+        }finally{
+            setLoading(false);
+        }
     }
 
     // Table Columns
@@ -151,6 +158,7 @@ const columns = [
                         </Item>
                         <Item>
                             <Button
+                            loading={loading}
                             type="text"
                             htmlType="submit"
                             className="!bg-blue-400 !text-white !font-bold !w-full">
