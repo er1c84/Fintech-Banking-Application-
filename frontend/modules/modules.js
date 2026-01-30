@@ -1,3 +1,14 @@
+import axios from "axios";
+
+// http request
+export const http = (accessToken=null) => {
+  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+  if (accessToken){
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+  }
+  return axios;
+}
+
 //trim data
 export const trimData = (obj) => {
   const newObj = {};
