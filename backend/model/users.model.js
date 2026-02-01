@@ -19,6 +19,7 @@ const usersSchema = new Schema({
     }
 }, { timestamps: true });   
 
+//mongoose middleware to hash pw before saving
 usersSchema.pre('save', async function(next){
     const user = this;
     if (!user.isModified('password')) return next();
