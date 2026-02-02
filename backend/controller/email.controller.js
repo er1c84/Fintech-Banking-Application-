@@ -78,7 +78,7 @@ const sendEmail = (req, res) => {
 </html>
 
     `;
-}
+
 
 const mailOptions = {
     from : process.env.ADMIN_EMAIL,
@@ -99,7 +99,7 @@ transporter.sendMail(mailOptions, (err, info) => {
         emailSend: true,
     })
 })
-
+}
 module.exports = {
     sendEmail
 };
