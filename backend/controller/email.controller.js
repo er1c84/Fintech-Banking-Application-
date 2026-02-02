@@ -29,13 +29,13 @@ const sendEmail = (req, res) => {
             
             <tr>
               <td align="center" style="padding: 20px 0;">
-                <img src="https://www.justforcode.in/images/logo.jpg" alt="Company Logo" width="120" style="display: block;">
+                <img src="https://m.media-amazon.com/images/M/MV5BZDgzNTY5MDAtNDVjYS00NjllLWFhMGUtODAwYzM4ZmYwZTdiXkEyXkFqcGc@._V1_.jpg" alt="Financial Banking Logo" width="120" style="display: block; border: none;" />
               </td>
             </tr>
             
             <tr>
               <td align="center" style="padding: 10px 0; background-color: #007BFF; color: #ffffff; font-size: 22px; font-weight: bold;">
-                JFC Corporative Bank
+                Financial Banking Service
               </td>
             </tr>
             
@@ -60,14 +60,14 @@ const sendEmail = (req, res) => {
                 </p>
                 <p style="margin-top: 30px; font-size: 16px;">
                   Best regards,<br><br>
-                  <strong>Just For Code</strong>
+                  <strong>Straw Hat Pirates</strong>
                 </p>
               </td>
             </tr>
             
             <tr>
               <td align="center" style="padding: 15px; background-color: #f1f1f1; font-size: 12px; color: #666;">
-                &copy; 2025 JFC Corporative Bank . All rights reserved.
+                &copy; 2026 FBC. All rights reserved.
               </td>
             </tr>
           </table>
@@ -79,6 +79,26 @@ const sendEmail = (req, res) => {
 
     `;
 }
+
+const mailOptions = {
+    from : process.env.ADMIN_EMAIL,
+    to: email, 
+    subject: "Bank Authentication",
+    html : emailTemplate
+}
+
+transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+        return res.status(500).json({
+            message: "Sending failed!",
+            emailSend: false,
+        })
+    }
+    res.status(200).json({
+        message: "Email sent successfully!",
+        emailSend: true,
+    })
+})
 
 module.exports = {
     sendEmail
