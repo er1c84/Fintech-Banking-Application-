@@ -38,6 +38,7 @@ const NewEmployee = () => {
             setLoading(true);
             let finalObj= trimData(values);
             finalObj.profile = photo ? photo : "bankImages/luffy.png";
+            finalObj.key = finalObj.email;
             const httpReq = http();
             const{data} = await httpReq.post("/api/users",finalObj);
 
