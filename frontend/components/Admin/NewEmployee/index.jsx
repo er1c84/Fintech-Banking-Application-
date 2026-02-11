@@ -97,7 +97,7 @@ const columns = [
     render: (profile) =>
       profile ? (
         <img
-          src={profile}
+          src={`${import.meta.env.VITE_BASEURL}/${profile}`}
           alt="profile"
           className="w-10 h-10 rounded-full object-cover"
         />
