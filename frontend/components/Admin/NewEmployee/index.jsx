@@ -3,7 +3,8 @@ import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
 import swal from "sweetalert";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
 
 const {Item} = Form;
 const NewEmployee = () => {
@@ -11,7 +12,23 @@ const NewEmployee = () => {
     const [empForm] = Form.useForm();
     const [messageApi, context] = message.useMessage();
     const [loading, setLoading] = useState(false);
-    const [photo, setPhoto] = useState(false);
+    const [photo, setPhoto] = useState(null);
+    const [allEmployees, setAllEmployee] = useState([]);
+
+    //get all employee data
+    useEffect(() => {
+        const fetcher = async () => {
+            try{
+                const httpReq = http();
+                const {data} = await httpReq.get("/api/users");
+                setAllEmployee(data.data);
+            }catch(err){
+                messageApi.error("Unable to fetch data!");
+            }
+        }
+        fetcher();
+
+    }, []);
 
     // create new employee
     const onFinish = async (values) => {
@@ -203,11 +220,10 @@ const columns = [
                 className="md:col-span-2" 
                 title="List Employees"
                 >
-                   <Table
-  columns={columns}
-  dataSource={[{}, {}]}
-  rowKey={(record, index) => index}
-/>
+                <Table
+                    columns={columns}
+                    dataSource={allEmployees}
+                />
                 </Card>
             </div>
         </Adminlayout>

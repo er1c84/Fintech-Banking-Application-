@@ -1,5 +1,19 @@
 const dbService = require('../services/db.service');
 
+const getData = async (req, res, schema) => {
+    try{
+        const dbRes = await dbService.findAllRecord(schema);
+        return res.status(200).json({
+            message: "Record found!",
+            data: dbRes
+        })
+    }catch(error){
+        res.status(500).json({
+            message: "Internal Server Error",
+            error
+        })
+    }
+}
 
 const createData = async (req, res, Schema) => {
 try{
@@ -30,5 +44,6 @@ catch(error){
 }
 }
 module.exports = {
-    createData 
+    createData,
+    getData
 }
