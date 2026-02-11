@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, message, Table } from "antd";
+import { Button, Card, Form, Input, message, Popconfirm, Table } from "antd";
 import Adminlayout from "../../Layout/Adminlayout";
 import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, EyeOutlined, SwapLeftOutlined } from "@ant-design/icons";
 import { trimData, http } from "../../../modules/modules";
@@ -69,6 +69,19 @@ const NewEmployee = () => {
         }
     }
 
+    // update isActive
+    const updateIsActive = async (id, isActive) =>{
+        try{
+            const obj = {
+                isActive: !isActive
+            }
+            const httpReq = http();
+            await httpReq.put(`/api/users/${id}`, obj);
+            messageApi.success("Record updated successfully!");
+        }catch(err){
+            messageApi.error("Unable to update isActive!");
+        }
+    }
     //handles file upload
     const handleUpload = async (e) => {
        try{
@@ -131,11 +144,18 @@ const NewEmployee = () => {
     fixed : "right",
     render: (_, obj) => (
         <div className="flex gap-1">
-            <Button
-            type="text"
-            className={`${obj.isActive ? "!bg-indigo-100 !text-white" : "!bg-pink-100 !text-pink-500"}`}
-            icon={obj.isActive ? <EyeOutlined/> : <EyeInvisibleOutlined/>} 
+            <Popconfirm
+            title={"Are you sure?"}
+            description="Once you update, you can also re-update!"
+            onCancel={() => messageApi.info("No changes occur!")}
+            onConfirm={() => updateIsActive(obj._id, obj.isActive)} 
+            >
+                <Button
+                type="text"
+                className={`${obj.isActive ? "!bg-indigo-100 !text-white" : "!bg-pink-100 !text-pink-500"}`}
+                icon={obj.isActive ? <EyeOutlined/> : <EyeInvisibleOutlined/>} 
             />
+            </Popconfirm>
             <Button
             type="text"
             className="!bg-pink-100 !text-pink-500"

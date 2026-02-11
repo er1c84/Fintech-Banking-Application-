@@ -11,4 +11,8 @@ router.post("/", (req, res) => {
     controller.createData(req, res, usersSchema);
 });
 
+router.put("/:id", (req, res) => {
+    controller.updateData(req, res, usersSchema);
+});
+
 module.exports = router;
