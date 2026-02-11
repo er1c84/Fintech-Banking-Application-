@@ -14,6 +14,7 @@ const NewEmployee = () => {
     const [loading, setLoading] = useState(false);
     const [photo, setPhoto] = useState(null);
     const [allEmployees, setAllEmployee] = useState([]);
+    const [no, setNo] = useState(0);
 
     //get all employee data
     useEffect(() => {
@@ -28,7 +29,7 @@ const NewEmployee = () => {
         }
         fetcher();
 
-    }, []);
+    }, [no]);
 
     // create new employee
     const onFinish = async (values) => {
@@ -51,6 +52,7 @@ const NewEmployee = () => {
             messageApi.success("Employee Created Successfully");
             empForm.resetFields();
             setPhoto(null);
+            setNo(no+1);
         }
         catch(err){
             if(err?.response?.data?.error?.code ==11000){
@@ -78,6 +80,8 @@ const NewEmployee = () => {
             const httpReq = http();
             await httpReq.put(`/api/users/${id}`, obj);
             messageApi.success("Record updated successfully!");
+            setNo(no+1);
+            
         }catch(err){
             messageApi.error("Unable to update isActive!");
         }
@@ -152,7 +156,7 @@ const NewEmployee = () => {
             >
                 <Button
                 type="text"
-                className={`${obj.isActive ? "!bg-indigo-100 !text-white" : "!bg-pink-100 !text-pink-500"}`}
+                className={`${obj.isActive ? "!bg-indigo-300 !text-white" : "!bg-pink-100 !text-pink-500"}`}
                 icon={obj.isActive ? <EyeOutlined/> : <EyeInvisibleOutlined/>} 
             />
             </Popconfirm>
